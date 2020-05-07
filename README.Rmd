@@ -25,6 +25,6 @@ The goal of weighter is to implement principled model averaging.
 
 You can install the development version from [GitHub](https://github.com/) with:
 
-```{r}
+```{r eval = FALSE}
 remotes::install_github("mrc-ide/weighter")
 ```
