@@ -69,11 +69,15 @@ model_ranks <- function(pred, groupvars, errvar) {
 ##' among \eqn{M_1, M_2, \dots M} models.
 ##' @title Compute Model Weights
 ##' @param pred data.frame that has at least columns specified via
-##' parameters \code{groupvars} and \code{rank}
+##' parameters \code{groupvars} and \code{rank}. pred is expected
+##' to have the same number of elements of grouping variable within
+##' each group. That is, each model should have been run for the same
+##' number of elements of groupvar. If this is not the case, use
+##' \code{model_weights} instead.
 ##' @param groupvars quoted variable names used to define groups within
 ##' which model weights are computed. Defaults to model.
 ##' @param rankvar quoted variable names that contain model ranks.
-##' @seealso \code{model_ranks}
+##' @seealso \code{model_ranks} \code{model_weights}
 ##' @return a data.frame with columns model and weight where weight is
 ##' the unnormalised weight of the model
 ##' @author Sangeeta Bhatia
@@ -88,8 +92,10 @@ model_ranks <- function(pred, groupvars, errvar) {
 ##'   stringsAsFactors = FALSE
 ##' )
 ##' ranked <- model_ranks(pred, c("country", "date"), "error")
-##' model_weights(ranked)
-model_weights <- function(pred, groupvars = "model", rankvar = "rank") {
+##' model_weights_in_group(ranked)
+model_weights_in_group <- function(pred,
+                                   groupvars = "model",
+                                   rankvar = "rank") {
 
   indices <- list()
   for (groupvar in groupvars) {
@@ -104,7 +110,7 @@ model_weights <- function(pred, groupvars = "model", rankvar = "rank") {
   )
 
   if (! max(npreds) == min(npreds)) {
-    warning(
+    stop(
       "Number of predictions made by each model are not the same"
     )
   }
@@ -131,4 +137,47 @@ model_weights <- function(pred, groupvars = "model", rankvar = "rank") {
   out$npreds[match(x = names(npreds), table = out$model)] <- npreds
 
   out
+}
+
+##' Compute Model Weights
+##'
+##' Compute model weights within each group
+##' @title Compute Model Weights
+##' @inheritParams model_ranks
+##'
+##' @return list
+##' @author Sangeeta Bhatia
+model_weights <- function(pred, groupvars, errvar) {
+
+  ## Identify countries that have the same set of models
+  mapping <- groupvar_to_model(pred, groupvars)
+  ## Unique combinations of models
+  models <- unique(mapping)
+  grpvar_to_model <- vector(
+    mode = "list", length = length(models)
+  )
+  names(grpvar_to_model) <- sapply(models, paste, collapse = "_")
+  for (model in models) {
+    idx <- Position(
+      function(x) identical(x, model), mapping, nomatch = 0
+    )
+    grpvar_to_model[[paste(model, collapse = "_")]] <- names(mapping)[idx]
+  }
+  ## For each model combination,
+  ## Group by variables for which this combination was run
+  ## Within each group, compute model rank, and model weights
+  out <- vector(
+    mode = "list", length = length(models)
+  )
+  names(out) <- sapply(models, paste, collapse = "_")
+
+  for (combo in grpvar_to_model) {
+    idx <- df[[groupvar]] %in% combo
+    df <- pred[idx, ]
+    ranked <- model_ranks(df, groupvars, errvar)
+    out[[[paste(model, collapse = "_")]]] <- model_weights_in_group(df)
+  }
+
+  out
+
 }

@@ -12,7 +12,7 @@ test_that("Model weights are as expected", {
     groupvars = c("country", "date"),
     errvar = "error"
   )
-  weights <- model_weights(ranked)
+  weights <- model_weights_in_group(ranked)
   out <- c(2.5, 2)
   expect_true(all(weights$weight == out))
  }

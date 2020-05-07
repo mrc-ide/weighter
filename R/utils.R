@@ -23,11 +23,11 @@ groupvar_to_model <- function(pred, groupvars) {
       values = list(pred[[groupvar]])
     )
   }
-  out <- split(pred, indices)
+  out <- split(pred, indices, drop = TRUE)
   out <- sapply(
     out,
     FUN = function(x) {
-      unique(x$model)
+      unique(as.character(x$model))
     }
   )
   out
@@ -54,9 +54,9 @@ model_to_groupvar <- function(pred, groupvars) {
 
 
   sapply(
-    split(pred, pred$model),
+    split(pred, pred$model, drop = TRUE),
     FUN = function(x) {
-      x[[groupvars]]
+      as.character(x[[groupvars]])
     }
   )
 
