@@ -92,7 +92,7 @@ model_ranks <- function(pred, groupvars, errvar) {
 model_weights <- function(pred, groupvars = "model", rankvar = "rank") {
 
   indices <- list()
-  for (groupvar in c(groupvars)) {
+  for (groupvar in groupvars) {
     indices <- append(
       x = indices,
       values = list(pred[[groupvar]])
@@ -127,6 +127,8 @@ model_weights <- function(pred, groupvars = "model", rankvar = "rank") {
     },
     simplify = TRUE
   )
+  out <- do.call(what = 'rbind', args = out)
+  out$npreds[match(x = names(npreds), table = out$model)] <- npreds
 
-  do.call(what = 'rbind', args = out)
+  out
 }
