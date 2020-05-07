@@ -1,13 +1,23 @@
 Package: weighter
-Title: What the Package Does (One Line, Title Case)
-Version: 0.0.0.9000
+Title: Model averaging
+Version: 0.0.1
 Authors@R: 
-    person(given = "First",
-           family = "Last",
+      c(person(given = "Sangeeta",
+           family = "Bhatia",
            role = c("aut", "cre"),
-           email = "first.last@example.com",
-           comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
-License: What license it uses
+           email = "s.bhatia@imperial.ac.uk"),
+      c(person(given = "Anne",
+           family = "Cori",
+           role = c("aut"),
+           email = "a.cori@imperial.ac.uk")),
+      person(given = "Pierre",
+           family = "Nouvellet",
+           role = c("aut"),
+           email = "p.nouvellet@imperial.ac.uk"))
+Description: This package implementes model averaging.
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
+RoxygenNote: 7.0.2
+Suggests: 
+    covr
