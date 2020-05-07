@@ -7,35 +7,27 @@
 model_ranks(pred, groupvars, errvar)
 }
 \arguments{
-\item{pred}{data.frame with at
-least one column called model}
+\item{pred}{data.frame with at least one column called model}
 
-\item{groupvars}{quoted variable
-names used to define groups within
+\item{groupvars}{quoted variable names used to define groups within
 which models should be ranked.}
 
-\item{errvar}{quoted column name
-that contains the metric used to
+\item{errvar}{quoted column name that contains the metric used to
 rank models}
 }
 \value{
-data.frame with the same
-structure as \code{pred} and an
-extra column called rank which
-contains the model ranks within
+data.frame with the same structure as \code{pred} and an
+extra column called rank which contains the model ranks within
 the groups defined by \code{groupvar}
 }
 \description{
 Rank models according to the error
 }
 \details{
-When multiple models have made
-predictions, we want to rank them
-by their error, where error can
-be any metric e.g. Root mean squared
-error or likelihood. Each model
-is ranked within the groups defined
-by \code{groupvars}
+When multiple models have made predictions, we want to rank them
+by their error, where error can be any metric e.g. Root mean
+squared error or likelihood. Each model is ranked within the
+groups defined by \code{groupvars}
 }
 \examples{
 pred <- data.frame(
