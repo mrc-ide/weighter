@@ -152,17 +152,6 @@ model_weights <- function(pred, groupvars, errvar) {
   ## Identify countries that have the same set of models
   mapping <- groupvar_to_model(pred, groupvars)
   ## Unique combinations of models
-  models <- unique(mapping)
-  grpvar_to_model <- vector(
-    mode = "list", length = length(models)
-  )
-  names(grpvar_to_model) <- sapply(models, paste, collapse = "_")
-  for (model in models) {
-    idx <- Position(
-      function(x) identical(x, model), mapping, nomatch = 0
-    )
-    grpvar_to_model[[paste(model, collapse = "_")]] <- names(mapping)[idx]
-  }
   ## For each model combination,
   ## Group by variables for which this combination was run
   ## Within each group, compute model rank, and model weights
@@ -175,7 +164,7 @@ model_weights <- function(pred, groupvars, errvar) {
     idx <- df[[groupvar]] %in% combo
     df <- pred[idx, ]
     ranked <- model_ranks(df, groupvars, errvar)
-    out[[[paste(model, collapse = "_")]]] <- model_weights_in_group(df)
+    out[[paste(model, collapse = "_")]] <- model_weights_in_group(df)
   }
 
   out
