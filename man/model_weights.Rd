@@ -16,13 +16,19 @@ which models should be ranked.}
 rank models}
 }
 \value{
-list
+named list where the names are the combinations of
+models run for a group, and each element of the list is a
+data.frame containing model weights outputted from
+\code{model_weights_in_group}
 }
 \description{
 Compute Model Weights
 }
 \details{
 Compute model weights within each group
+}
+\seealso{
+model_weights_in_group
 }
 \author{
 Sangeeta Bhatia

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Function reference • weighter</title>
+<title>Mapping of models to groups for which they have been run — model_to_groupvar • weighter</title>
 
 
 <!-- jquery -->
@@ -35,7 +35,9 @@
 
 
 
-<meta property="og:title" content="Function reference" />
+<meta property="og:title" content="Mapping of models to groups for which they have been run — model_to_groupvar" />
+<meta property="og:description" content="Mapping of models to groups for which they have been run" />
+<meta name="twitter:card" content="summary" />
 
 
 
@@ -54,7 +56,7 @@
   </head>
 
   <body>
-    <div class="container template-reference-index">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -96,66 +98,59 @@
       </header>
 
 <div class="row">
-  <div class="contents col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Reference</h1>
+    <h1>Mapping of models to groups for which they have been run</h1>
+    
+    <div class="hidden name"><code>model_to_groupvar.Rd</code></div>
     </div>
 
-    <table class="ref-index">
+    <div class="ref-description">
+    <p>Mapping of models to groups for which they have been run</p>
+    </div>
 
-    <colgroup>
-      
-      <col class="alias" />
-      <col class="title" />
-    </colgroup>
+    <pre class="usage"><span class='fu'>model_to_groupvar</span>(<span class='no'>pred</span>, <span class='no'>groupvars</span>)</pre>
 
-    <tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      <tr>
-        
-        <td>
-          <p><code><a href="groupvar_to_model.html">groupvar_to_model()</a></code> </p>
-        </td>
-        <td><p>Mapping of groupvars to model</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="model_ranks.html">model_ranks()</a></code> </p>
-        </td>
-        <td><p>Assign ranks to models</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="model_to_groupvar.html">model_to_groupvar()</a></code> </p>
-        </td>
-        <td><p>Mapping of models to groups for which they have been run</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="model_weights.html">model_weights()</a></code> </p>
-        </td>
-        <td><p>Compute Model Weights</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="model_weights_in_group.html">model_weights_in_group()</a></code> </p>
-        </td>
-        <td><p>Compute Model Weights</p></td>
-      </tr>
-    </tbody>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>pred</th>
+      <td><p>data.frame with at least one column called model</p></td>
+    </tr>
+    <tr>
+      <th>groupvars</th>
+      <td><p>quoted variable names used to define groups within
+which models should be ranked.</p></td>
+    </tr>
     </table>
-  </div>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>list</p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>In some cases, we might not have the same set of models run for
+a grouping variable. For example, say the grouping variable is
+country, and we have Models \(M_1\), \(M_2\) and \(M_3\)
+run for country \(C_1\), and models \(M_1, M_2, M_3, M_4\) run
+country \(C_2\). For this example, this function will return the
+list
+m_1 = c_1, c_2, m_2 = c_1, c_1, m_3 = c_1, c_2, m_4 = c_2
+This can be used to identify for which countries a give model has
+been run.</p>
+
+  </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#section-all-functions">All functions</a></li>
+      <li><a href="#arguments">Arguments</a></li>
+      <li><a href="#value">Value</a></li>
+      <li><a href="#details">Details</a></li>
     </ul>
+
+    <h2>Author</h2>
+    <p>Sangeeta Bhatia</p>
   </div>
 </div>
 

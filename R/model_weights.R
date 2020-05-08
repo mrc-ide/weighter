@@ -145,8 +145,13 @@ model_weights_in_group <- function(pred,
 ##' @title Compute Model Weights
 ##' @inheritParams model_ranks
 ##'
-##' @return list
+##' @return named list where the names are the combinations of
+##' models run for a group, and each element of the list is a
+##' data.frame containing model weights outputted from
+##' \code{model_weights_in_group}
+##' @seealso model_weights_in_group
 ##' @author Sangeeta Bhatia
+##' @export
 model_weights <- function(pred, groupvars, errvar) {
 
   ## Identify countries that have the same set of models
