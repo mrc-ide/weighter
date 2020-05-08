@@ -29,7 +29,8 @@ groupvar_to_model <- function(pred, groupvars) {
     out,
     FUN = function(x) {
       unique(as.character(x$model))
-    }
+    },
+    simplify = FALSE
   )
 
   models <- unique(out)

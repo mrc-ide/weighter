@@ -158,8 +158,8 @@ model_weights <- function(pred, groupvars, errvar) {
   names(out) <- sapply(models, paste, collapse = "_")
 
   for (combo in names(mapping)) {
-    idx <- df[[groupvars]] %in% mapping[[combo]]
-    df <- pred[idx, ]
+    idx <- pred[[groupvars]] %in% mapping[[combo]]
+    df <- droplevels(pred[idx, ])
     ranked <- model_ranks(df, groupvars, errvar)
     out[[combo]] <- model_weights_in_group(ranked)
   }
