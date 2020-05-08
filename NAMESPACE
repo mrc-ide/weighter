@@ -3,4 +3,4 @@
 export(groupvar_to_model)
 export(model_ranks)
 export(model_to_groupvar)
-export(model_weights)
+export(model_weights_in_group)

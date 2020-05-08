@@ -4,45 +4,25 @@
 \alias{model_weights}
 \title{Compute Model Weights}
 \usage{
-model_weights(pred, groupvars = "model", rankvar = "rank")
+model_weights(pred, groupvars, errvar)
 }
 \arguments{
-\item{pred}{data.frame that has at least columns specified via
-parameters \code{groupvars} and \code{rank}}
+\item{pred}{data.frame with at least one column called model}
 
 \item{groupvars}{quoted variable names used to define groups within
-which model weights are computed. Defaults to model.}
+which models should be ranked.}
 
-\item{rankvar}{quoted variable names that contain model ranks.}
+\item{errvar}{quoted column name that contains the metric used to
+rank models}
 }
 \value{
-a data.frame with columns model and weight where weight is
-the unnormalised weight of the model
+list
 }
 \description{
-Compute model weights from model ranks
+Compute Model Weights
 }
 \details{
-In a group defined by \code{groupvars}, the weight of a model is
-defined as
-\deqn{weight(M) = \sum\limits_{i = 1}^{M}{K(i) / i}}
-where \eqn{K(i)} is the number of times model M is ranked \eqn{i}
-among \eqn{M_1, M_2, \dots M} models.
-}
-\examples{
-
-pred <- data.frame(
-  model = as.factor(c("a", "b", "c", "a", "b", "c")),
-  country = c("C1", "C1", "C1", "C2", "C2", "C2"),
-  error = c(6L, 1L, 3L, 4L, 7L, 9L),
-  date = c("1", "1", "1", "2", "2", "2"),
-  stringsAsFactors = FALSE
-)
-ranked <- model_ranks(pred, c("country", "date"), "error")
-model_weights(ranked)
-}
-\seealso{
-\code{model_ranks}
+Compute model weights within each group
 }
 \author{
 Sangeeta Bhatia

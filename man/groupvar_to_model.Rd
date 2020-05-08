@@ -21,13 +21,12 @@ Mapping of groupvar to models run
 \details{
 In some cases, we might not have the same set of models run for
 a grouping variable. For example, say the grouping variable is
-country, and we have Models \eqn{m_1}, \eqn{m_2} and \eqn{m_3}
-run for country \eqn{c_1}, and models \eqn{m_1, m_2, m_3, m_4} run
-country \eqn{c_2}. For this example, this function will return the
-list
-{c_1 = {m_1, m_2, m_3}, c_2 = {m_1, m_2, m_3, m_4}}
-This can be used to identify which countries have the same set of
-models run for them.
+country, and we have Models \eqn{m1}, \eqn{m2} and \eqn{m3}
+run for country \eqn{c1}, and models \eqn{m1, m2, m3, m4} run
+for country \eqn{c2}. For this example, \code{groupvar_to_model} returns
+a named list where names are formed by concatenating models
+and elements are countries for which a particular set of models has been run.
+(m1_m2_m3 = c1, m1_m2_m3_m4 = c2)
 }
 \author{
 Sangeeta Bhatia
